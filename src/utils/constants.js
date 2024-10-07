@@ -22,3 +22,5 @@ export const SUPPORTED_LANGUAGE = [
   { identifier: "hindi", name: "Hindi" },
   { identifier: "spanish", name: "Spanish" },
 ];
+
+export const GOOGLE_GEMINI_KEY = "AIzaSyCH1qncSggyIemsNfMcSeZp60fZYytswHE"
