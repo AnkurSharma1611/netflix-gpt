@@ -37,7 +37,6 @@ const GptSearchBar = () => {
       const result = await model.generateContent(gptQuery);
       const response = await result.response;
       const moviesSearchApi = response.text();
-      console.log(moviesSearchApi);
       const gptMovies = moviesSearchApi.split(", ");
       return gptMovies;
     }

@@ -1,13 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import myIcon from "../images/play.svg";
+import infoIcon from "../images/info.svg";
+import { useNavigate } from "react-router-dom";
 
-const VideoTitle = ({ title, overview }) => {
+const VideoTitle = ({ title, overview,movieId }) => {
+  const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(true);
+  const [shouldFade, setShouldFade] = useState(false);
+
+  useEffect(() => {
+    const fadeTimer = setTimeout(() => {
+      setShouldFade(true); // Trigger fade out by updating opacity
+    }, 3000);
+
+    const timer = setTimeout(() => {
+      setIsVisible(false);
+    }, 4000);
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(fadeTimer);
+    };
+  }, []);
+
+  const showTrailer = () => {
+    navigate(`/browse/watch/${movieId}`);
+  }
+
   return (
-    <div className="w-screen aspect-video pt-[20%] px-6 md:px-24 absolute text-white bg-gradient-to-r from-black"  >
+    <div className="w-screen aspect-video pt-[20%] px-6 md:px-24 absolute text-white bg-gradient-to-r from-black">
       <h1 className="text-2xl md:text-6xl font-bold">{title}</h1>
-      <p className="hidden md:inline-block py-6 text-lg w-1/4">{overview}</p>
-      <div className="my-4 md:my-0">
-        <button className=" bg-white text-black py-1 px-3 md:py-4 md:px-12 text-xl rounded-lg hover:bg-opacity-80">▶️ Play</button>
-        <button className=" hidden md:inline-block mx-2 bg-gray-500 text-white p-4 px-12 text-xl bg-opacity-50 rounded-lg"> More Info</button>
+      {/* {isVisible && (
+        <p className="hidden md:inline-block py-6 text-lg w-1/4 ">{overview}</p>
+      )} */}
+      {isVisible && (
+        <p
+          className={`transition-opacity duration-5000 ease-in-out ${
+            shouldFade ? "opacity-0" : "opacity-100"
+          } hidden md:inline-block py-6 text-lg w-1/4`}
+        >
+          {overview}
+        </p>
+      )}
+      <div className={` ${!isVisible ? " md:py-6 " : "py-0"} my-4 md:my-0`}>
+        <button className="bg-white text-black py-1 px-3 md:py-4 md:px-10 text-xl rounded-lg hover:bg-opacity-80">
+          <div onClick={showTrailer}
+           className="flex flex-row items-center">
+            <img className="w-7 md:w-10 " src={myIcon} alt="play-icon" />
+            <p className="">Play</p>
+          </div>
+        </button>
+        <button className=" hidden md:inline-block mx-2 bg-gray-500 text-black p-4 px-7 text-xl bg-opacity-50 rounded-lg">
+          <div className="flex flex-row items-center">
+            <img className="md:w-10" src={infoIcon} alt="info-icon" />
+            <p>More Info</p>
+          </div>
+        </button>
       </div>
     </div>
   );
