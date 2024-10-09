@@ -3,7 +3,15 @@ import myIcon from "../images/play.svg";
 import infoIcon from "../images/info.svg";
 import { useNavigate } from "react-router-dom";
 
-const VideoTitle = ({ title, overview, movieId }) => {
+const VideoTitle = ({
+  title,
+  overview,
+  movieId,
+  releaseDate,
+  popularity,
+  voteAverage,
+  voteCount,
+}) => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(true);
   const [shouldFade, setShouldFade] = useState(false);
@@ -23,6 +31,13 @@ const VideoTitle = ({ title, overview, movieId }) => {
       clearTimeout(fadeTimer);
     };
   }, []);
+
+  const formatDateToDDMMYYYY = (dateString) => {
+    const [year, month, day] = dateString.split("-");
+    return `${day}/${month}/${year}`;
+  };
+
+  const formattedDate = formatDateToDDMMYYYY(releaseDate);
 
   const showMoreInfo = () => {
     setShowInfo(!showInfo);
@@ -77,8 +92,18 @@ const VideoTitle = ({ title, overview, movieId }) => {
         </button>
       </div>
       {showInfo && (
-        <div className="hidden md:inline-block">
+        <div className="hidden w-1/2 md:inline-block">
           <h2>{overview}</h2>
+          <div className="flex mt-4">
+            <div>
+              <p>Release Date - {formattedDate}</p>
+              <p>Popularity - {popularity}</p>
+            </div>
+            <div className="ml-5">
+              <p>Vote Average - {voteAverage}</p>
+              <p>Vote Count - {voteCount}</p>
+            </div>
+          </div>
         </div>
       )}
     </div>
