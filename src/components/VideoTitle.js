@@ -26,6 +26,7 @@ const VideoTitle = ({ title, overview, movieId }) => {
 
   const showMoreInfo = () => {
     setShowInfo(!showInfo);
+    setIsVisible(false);
   };
 
   const movieInfoText = (overview, limit) => {
@@ -58,13 +59,17 @@ const VideoTitle = ({ title, overview, movieId }) => {
         </p>
       )}
       <div className={` ${!isVisible ? " md:py-6 " : "py-0"} my-4 md:my-0`}>
-        <button className="bg-white text-black py-1 px-3 md:py-4 md:px-10 text-xl rounded-lg hover:bg-opacity-80">
+        <button className="bg-white text-black py-1 px-3 md:py-3 md:px-10 text-xl rounded-lg hover:bg-opacity-80">
           <div onClick={showTrailer} className="flex flex-row items-center">
             <img className="w-7 md:w-10 " src={myIcon} alt="play-icon" />
             <p className="">Play</p>
           </div>
         </button>
-        <button className=" hidden md:inline-block mx-2 bg-gray-500 text-black p-4 px-7 text-xl bg-opacity-50 rounded-lg hover:bg-opacity-100">
+        <button
+          className={`${
+            showInfo ? "border-2 border-white bg-opacity-100 " : ""
+          } hidden md:inline-block mx-2 bg-gray-500 text-black p-3 px-7 text-xl bg-opacity-50 rounded-lg hover:bg-opacity-100`}
+        >
           <div onClick={showMoreInfo} className="flex flex-row items-center">
             <img className="md:w-10" src={infoIcon} alt="info-icon" />
             <p>More Info</p>
