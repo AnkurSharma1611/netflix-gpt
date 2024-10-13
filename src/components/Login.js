@@ -25,7 +25,6 @@ const Login = () => {
   };
 
   const handleButtonClick = () => {
-
     const message = checkValidData(email.current.value, password.current.value);
     setErrorMessage(message);
     if (message) return;
@@ -87,10 +86,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img className="h-screen object-cover"
-          src={BG_URL}
-          alt="bg-img"
-        />
+        <img className="h-screen object-cover" src={BG_URL} alt="bg-img" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
@@ -120,6 +116,12 @@ const Login = () => {
           placeholder="Password"
           className="p-4 my-4 w-full bg-gray-700"
         />
+        {isSignInForm && (
+          <>
+            <p>Try with Email - testuser@mail.com</p>
+            <p>Password - Test@123</p>
+          </>
+        )}
         <p className="text-red-500 font-bold text-lg py-2">{errorMessage}</p>
         <button
           className="p-4 my-6 bg-red-700 w-full rounded-lg"
