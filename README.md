@@ -1,3 +1,5 @@
+Live Link ->  https://netflix-gpt-beta-ten.vercel.app
+
 # Netflix GPT
 
 - Create React App 
